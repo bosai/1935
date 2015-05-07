@@ -10,4 +10,5 @@ $database = new medoo([
  
 	'port' => 3306
 ]);
+$prefix="bs_";
 ?>
