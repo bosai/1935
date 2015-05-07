@@ -7,7 +7,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 #$head->json();
 $safe=new safe;
 #$safe->ip();
-#$safe->token();
+$safe->token();
 
 switch ($_GET['act'])
 {
@@ -38,9 +38,12 @@ case "list_product":
 case "list_product_class":
 	$datas = $database->select("{$prefix}product_class", "*");
 	break;
+case "creat_news":
+	$database->insert()
+	$datas = array("status"=>"1","msg"=>"Creat success!");
+	break;
 default:
 	$datas=array("status"=>0,"msg"=>"No Action");
-	array_json($datas,1);
 }
 include 'common/check_empty.php';
 
