@@ -90,6 +90,9 @@ class allowIp {
    }
 }
 
+/**
+* Header
+*/
 class header {
 	function json(){
 	header('Content-type: text/json');
@@ -98,4 +101,22 @@ class header {
 	header('Content-type: text/xml');
 	}
 }
+
+/**
+* API认证
+*/
+class safe {
+	function ip(){
+	require '/common/check_allow.php';
+	}
+	function token(){
+	require '/common/check_token.php';
+	}
+	function white(){
+	require '/common/check_empty.php';
+	}
+
+}
+
+
 ?>

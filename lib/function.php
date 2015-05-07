@@ -1,9 +1,6 @@
 <?php
 /**
 * 获取客户端IP地址
-* @param integer $type 返回类型 0 返回IP地址 1 返回IPV4地址数字
-* @param boolean $adv 是否进行高级模式获取（有可能被伪装） 
-* @return mixed
 */
 function get_client_ip($type = 0,$adv=false) {
 $type = $type ? 1 : 0;
@@ -31,17 +28,14 @@ return $ip[$type];
 
 /**
 * 安全IP检测，支持IP段检测
-* @param string $ip 要检测的IP
-* @param string|array $ips 白名单IP或者黑名单IP
-* @return boolean true 在白名单或者黑名单中，否则不在
 */
 function is_safe_ip($ip="",$ips=""){ 
 if(!$ip) $ip = get_client_ip(); //获取客户端IP
 if($ips){
-if(is_string($ips)){ //ip用"," 例如白名单IP：192.168.1.13,123.23.23.44,193.134.*.*
+if(is_string($ips)){ 
 $ips = explode(",", $ips);
 }
-}else{ //读取后台配置 白名单IP
+}else{ 
 $obj = new Setting();
 $ips = explode(",", $obj->getConfig("whiteip")); 
 }
@@ -54,11 +48,79 @@ if($rs) return true;
 return 0;
 }
 
-function array_json($content){
-	print(json_encode($content));
+/**
+* Array数组转Json数组
+*/
+function array_json($content,$display){
+	$ct=json_encode($content);
+	if($display==1){print($ct);}else{return $ct;}
 }
 
-function on_whitelist_ip(){
-	require '/common/check_allow.php';
+
+/**
+* 可逆向加解密算法
+*/
+function encrypt($data, $key)
+{
+ $key = md5($key);
+    $x  = 0;
+    $len = strlen($data);
+    $l  = strlen($key);
+    for ($i = 0; $i < $len; $i++)
+    {
+        if ($x == $l) 
+        {
+         $x = 0;
+        }
+        $char .= $key{$x};
+        $x++;
+    }
+    for ($i = 0; $i < $len; $i++)
+    {
+        $str .= chr(ord($data{$i}) + (ord($char{$i})) % 256);
+    }
+    return base64_encode($str);
 }
+
+function decrypt($data, $key)
+{
+ $key = md5($key);
+    $x = 0;
+    $data = base64_decode($data);
+    $len = strlen($data);
+    $l = strlen($key);
+    for ($i = 0; $i < $len; $i++)
+    {
+        if ($x == $l) 
+        {
+         $x = 0;
+        }
+        $char .= substr($key, $x, 1);
+        $x++;
+    }
+    for ($i = 0; $i < $len; $i++)
+    {
+        if (ord(substr($data, $i, 1)) < ord(substr($char, $i, 1)))
+        {
+            $str .= chr((ord(substr($data, $i, 1)) + 256) - ord(substr($char, $i, 1)));
+        }
+        else
+        {
+            $str .= chr(ord(substr($data, $i, 1)) - ord(substr($char, $i, 1)));
+        }
+    }
+    return $str;
+}
+
+function object_array($array){
+  if(is_object($array)){
+    $array = (array)$array;
+  }
+  if(is_array($array)){
+    foreach($array as $key=>$value){
+      $array[$key] = object_array($value);
+    }
+  }
+  return $array;
+} 
 ?>
