@@ -16,7 +16,12 @@ case "list_about":
 	$datas = $database->select("{$prefix}about", "*",["belong" => $belong]);
 	break;
 case "list_basic":
-	$datas = $database->select("{$prefix}basic", "*",["belong" => $belong]);
+	if($_GET['id']){
+		$id = $_GET['id'];
+		$datas = $database->select("{$prefix}basic","*",["belong" => $belong,"id" => $id]);
+	}else{
+		$datas = $database->select("{$prefix}basic", "*",["belong" => $belong]);
+	}
 	break;
 case "list_contact":
 	$datas = $database->select("{$prefix}contact", "*",["belong" => $belong]);
@@ -28,13 +33,29 @@ case "list_message":
 	$datas = $database->select("{$prefix}message", "*",["belong" => $belong]);
 	break;
 case "list_news":
-	$datas = $database->select("{$prefix}news", "*",["belong" => $belong]);
+	if($_GET['id']){
+		$id = $_GET['id'];
+		$datas = $database->select("{$prefix}news","*",["belong" => $belong,"id" => $id]);
+	}elseif($_GET['cat_id']){
+		$cat_id = $_GET['cat_id'];
+		$datas = $database->select("{$prefix}news","*",["cat_id" => $cat_id,"belong" => $belong]);
+	}else{
+		$datas = $database->select("{$prefix}news", "*",["belong" => $belong]);
+	}
 	break;
 case "list_news_class":
 	$datas = $database->select("{$prefix}news_class", "*",["belong" => $belong]);
 	break;
 case "list_product":
-	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
+	if($_GET['cat_id']){
+		$cat_id = $_GET['cat_id'];
+		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"cat_id" => $cat_id]);
+	}elseif($_GET['id']){
+		$id = $_GET['id'];
+		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"id" => $id]);
+	}else{
+		$datas = $database->select("{$prefix}product", "*",["belong" => $belong]);
+	}
 	break;
 case "list_product_class":
 	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
@@ -43,13 +64,13 @@ case "create_news":
 	$new_title = trim($_POST['newtitle']);
 	$new_pic = trim($_POST['pic']);
 	$new_content = trim($_POST['content']);
+	$cat_id = $_POST['cat_id'];
 	$new_add_time = time();
 	$new_people = trim($_POST['people']);
-	$is_display = intval($_POST['is_display']);
 	$new_sort = intval($_POST['new_sort']);
 	$new_last_release = time();
 	if($new_title && $new_pic && $new_content && $new_add_time && $new_people 
-	&& $is_display && $new_sort && $news_last_release){
+	&& $new_sort && $news_last_release){
 		$arr = $_POST;
 		$arr['new_add_time'] = $new_add_time;
 		$arr['new_last_release'] = $new_last_release;
@@ -64,14 +85,10 @@ case "create_news":
 		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
 	}
 	break;
-case "update_news":
-	$id = $_GET['id'];
-	
 case "create_news_class":
 	$name = trim($_POST['name']);
-	$is_display = trim($_POST['is_display']);
 	$last_release = time();
-	if($name && $is_display && $last_release){
+	if($name && $last_release){
 		$arr = $_POST;
 		$arr['last_release'] = $last_release;
 		$arr['belong'] = $belong;
@@ -157,26 +174,13 @@ case "create_product":
 	$introduct = trim($arr['introduct']);
 	$advantage = trim($arr['advantage']);
 	$model = trim($arr['model']);
-	$is_display = trim($arr['is_display']);
 	$recommend = trim($arr['recommend']);
 	$pic = trim($arr['pic']);
-	if($name && $introduct && $advantage && $model && $is_display && $recommend && $pic){
+	if($name && $introduct && $advantage && $model &&  && $recommend && $pic){
 		$arr['pro_add_time'] = time();
 		$arr['belong'] = $belong;
 		$arr['pro_last_release'] = time();
 		$create_id = $database->insert("{$prefix}product",$arr);
-		if($create_id !=0){
-			$datas = array("status"=>"1","msg"=>"添加成功");
-		}else{
-			$datas = array("status"=>"0","msg"=>"添加失败");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
-	}
-	if($act_content && $act_content && $act_map_coordinate && $act_map_content && $act_map_title){
-		$arr['art_last_release'] = time();
-		$arr['belong'] = $belong;
-		$create_id = $database->insert("{$prefix}contact",$arr);
 		if($create_id !=0){
 			$datas = array("status"=>"1","msg"=>"添加成功");
 		}else{
@@ -221,14 +225,102 @@ case "create_modular":
 		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
 	}
 case "update_basic":
-	$id = $_GET['id'];
-	
-	$arr = $_POST;
-	$update_id = $database->update("{$prefix}basic",$arr);
-	if($update_id){
-		$datas = array("status"=>"1","msg"=>"修改成功");
-	}else{
-		$datas = array("status"=>"0","msg"=>"修改失败");
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		$arr['sic_last_release'] = time();
+		unset($arr['id']);
+		$update_id = $database->update("{$prefix}basic",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_about":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['out_last_release'] = time();
+		$update_id = $database->update("{$prefix}about",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_contact":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['art_last_release'] = time();
+		$update_id = $database->update("{$prefix}contact",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_news":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['news_last_release'] = time();
+		$update_id = $database->update("{$prefix}news",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_news_class":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['last_release'] = time();
+		$update_id = $database->update("{$prefix}news_class",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_product_class":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['last_release'] = time();
+		$update_id = $database->update("{$prefix}product_class",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "update_product":
+	if($_POST['id']){
+		$arr = $_POST;
+		$id = $arr['id'];
+		unset($arr['id']);
+		$arr['pro_last_release'] = time();
+		unset($arr['old_pic']);
+		$update_id = $database->update("{$prefix}product",$arr,["id" => $id]);
+		if($update_id){
+			$datas = array("status"=>"1","msg"=>"修改成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
 	}
 	break;
 default:

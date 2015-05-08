@@ -136,6 +136,7 @@ CREATE TABLE IF NOT EXISTS `bs_message` (
 CREATE TABLE IF NOT EXISTS `bs_modular` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
+  `is_display` enum('0','1') default '1';
   `s_belong` int(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='模块表' AUTO_INCREMENT=1 ;
@@ -156,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `bs_news` (
   `new_people` varchar(30) NOT NULL DEFAULT 'admin',
   `is_display` enum('0','1') NOT NULL DEFAULT '1',
   `new_sort` int(5) DEFAULT NULL,
+  `cat_id` int(11) not null,
   `news_last_release` int(13) NOT NULL,
   `belong` int(4) NOT NULL,
   PRIMARY KEY (`id`)
