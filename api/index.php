@@ -3,44 +3,44 @@ require '../config/default.php';
 require '../lib/function.php';	
 require '../lib/class.php';	
 error_reporting(E_ALL & ~E_NOTICE);
-#$head=new header;
-#$head->json();
+$head=new header;
+$head->json();
 $safe=new safe;
 #$safe->ip();
 $safe->token();
+$belong=$_GET['belong'];
+$limit=$_GET['limit']*10;
+if(!$limit){$limit=10;}
+global $limit;
 global $belong;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 switch ($_GET['act'])
 {
 case "list_about":
-	$datas = $database->select("{$prefix}about", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}about", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_basic":
-	$datas = $database->select("{$prefix}basic", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}basic", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_contact":
-	$datas = $database->select("{$prefix}contact", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}contact", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_log":
-	$datas = $database->select("{$prefix}log", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}log", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_message":
-	$datas = $database->select("{$prefix}message", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}message", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_news":
-	$datas = $database->select("{$prefix}news", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}news", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_news_class":
-	$datas = $database->select("{$prefix}news_class", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}news_class", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_product":
-	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "list_product_class":
-	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong,"LIMIT"=>$limit]);
 	break;
 case "create_news":
 	$new_title = trim($_POST['newtitle']);
@@ -59,51 +59,33 @@ case "create_news":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}news",$arr);
 		if($create_id!=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "update_news":
 	$id = $_GET['id'];
 	
 case "create_news_class":
-	$name = trim($_POST['name']);
-	$is_display = trim($_POST['is_display']);
+	$name = trim($_GET['name']);
+	$is_display = trim($_GET['is_display']);
 	$last_release = time();
-	if($name && $is_display && $last_release){
+	if($name && $last_release){
 		$arr = $_POST;
 		$arr['last_release'] = $last_release;
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}news_class",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "create_message":
@@ -114,23 +96,14 @@ case "create_message":
 	$mes_content = trim($arr['mes_content']);
 	if($mes_name && $mes_phone && $mes_email && $mes_content){
 		$arr['belong'] = $belong;
-		$create_id = database->insert("{$prefix}message",$arr);
+		$create_id = $database->insert("{$prefix}message",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "create_basic":
@@ -138,15 +111,9 @@ case "create_basic":
 	$arr['belong'] = $belong;
 	$create_id = $database->insert("{$prefix}basic",$arr);
 	if($create_id != 0){
-<<<<<<< HEAD
-		$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+		$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 	}else{
-		$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
-=======
-		$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-	}else{
-		$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
->>>>>>> origin/master
+		$datas = array("status"=>"0","msg"=>"Fail");
 	}
 	break;
 case "create_about":
@@ -159,21 +126,12 @@ case "create_about":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}about",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "create_contact":
@@ -188,21 +146,12 @@ case "create_contact":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}contact",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "create_product":
@@ -220,43 +169,25 @@ case "create_product":
 		$arr['pro_last_release'] = time();
 		$create_id = $database->insert("{$prefix}product",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success","id"=>$create_id);
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
-	if($act_content && $act_content && $act_map_coordinate && $act_map_content && $act_map_title){
+	/**if($act_content && $act_content && $act_map_coordinate && $act_map_content && $act_map_title){
 		$arr['art_last_release'] = time();
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}contact",$arr);
 		if($create_id !=0){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success");
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
-	}
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
+	}**/
 	break;
 case "create_product_class":
 	$arr = $_POST;
@@ -270,23 +201,13 @@ case "create_product_class":
 		$path = $info.'-'.$create_id;
 		$upd=$database->update("{$prefix}product_class",["path"=>$path]);
 		if($create_id && $upd){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success");
 		}else{
 			$database->delete("{$prefix}product_class","id = ".$create_id);
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$database->delete("{$prefix}product_class","id = ".$create_id);
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 	break;
 case "create_modular":
@@ -295,21 +216,12 @@ case "create_modular":
 		$arr['s_belong'] = $belong;
 		$create_id = $database->insert("{$prefix}modular",$arr);
 		if($create_id){
-<<<<<<< HEAD
-			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
+			$datas = array("status"=>"1","msg"=>"Success");
 		}else{
-			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+			$datas = array("status"=>"0","msg"=>"Fail");
 		}
 	}else{
-		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
-=======
-			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
-		}else{
-			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
-		}
-	}else{
-		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
->>>>>>> origin/master
+		$error = array("status"=>-3,"msg"=>"Incomplete request.");
 	}
 case "update_basic":
 	$id = $_GET['id'];
@@ -317,27 +229,13 @@ case "update_basic":
 	$arr = $_POST;
 	$update_id = $database->update("{$prefix}basic",$arr);
 	if($update_id){
-<<<<<<< HEAD
-		$datas = array("status"=>"1","msg"=>"ÐÞ¸Ä³É¹¦");
+		$datas = array("status"=>"1","msg"=>"Change success");
 	}else{
-		$datas = array("status"=>"0","msg"=>"ÐÞ¸ÄÊ§°Ü");
-=======
-		$datas = array("status"=>"1","msg"=>"ä¿®æ”¹æˆåŠŸ");
-	}else{
-		$datas = array("status"=>"0","msg"=>"ä¿®æ”¹å¤±è´¥");
->>>>>>> origin/master
+		$datas = array("status"=>"0","msg"=>"Change fail");
 	}
 	break;
 default:
 	$datas=array("status"=>0,"msg"=>"No Action");
 }
 include 'common/check_empty.php';
-<<<<<<< HEAD
 ?>
-=======
-?>
-
-
-
-
->>>>>>> origin/master
