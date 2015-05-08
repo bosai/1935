@@ -38,9 +38,9 @@ case "list_news":
 		$datas = $database->select("{$prefix}news","*",["belong" => $belong,"id" => $id]);
 	}elseif($_GET['cat_id']){
 		$cat_id = $_GET['cat_id'];
-		$datas = $database->select("{$prefix}news","*",["cat_id" => $cat_id,"belong" => $belong]);
+		$datas = $database->select("{$prefix}news","*",["cat_id" => $cat_id,"belong" => $belong,"order" => "new_sort DESC"]);
 	}else{
-		$datas = $database->select("{$prefix}news", "*",["belong" => $belong]);
+		$datas = $database->select("{$prefix}news", "*",["belong" => $belong,"order" => "new_sort DESC"]);
 	}
 	break;
 case "list_news_class":
@@ -52,13 +52,13 @@ case "list_product":
 		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"cat_id" => $cat_id]);
 	}elseif($_GET['id']){
 		$id = $_GET['id'];
-		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"id" => $id]);
+		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"id" => $id,"order" => "pro_sort DESC"]);
 	}else{
-		$datas = $database->select("{$prefix}product", "*",["belong" => $belong]);
+		$datas = $database->select("{$prefix}product", "*",["belong" => $belong,"order" => "pro_sort DESC"]);
 	}
 	break;
 case "list_product_class":
-	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
+	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong,"order" => "pro_class_sort DESC"]);
 	break;
 case "create_news":
 	$new_title = trim($_POST['newtitle']);
@@ -224,6 +224,21 @@ case "create_modular":
 	}else{
 		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
 	}
+	break;
+case "create_menu":
+	$arr = $_POST;
+	if($arr['name'] && $arr['mod_id']){
+		$arr['s_belong'] = $belong;
+		$create_id = $database->insert("{$prefix}menu",$arr);
+		if($create_id){
+			$datas = array("status"=>"1","msg"=>"添加成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"添加失败");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
+	}
+	break;
 case "update_basic":
 	if($_POST['id']){
 		$arr = $_POST;
@@ -320,6 +335,97 @@ case "update_product":
 			$datas = array("status"=>"1","msg"=>"修改成功");
 		}else{
 			$datas = array("status"=>"0","msg"=>"修改失败");
+		}
+	}
+	break;
+case "delete_modular":
+	if($_GET['id']){
+		$id = intval($_GET['id']);
+		$delete_id = $database->delete("{$prefix}modular",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_menu":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$delete_id = $database->delete("{$prefix}menu",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_message":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$delete_id = $database->delete("{$prefix}message",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_news_class":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$num = $database->select("{prefix}news",["cat_id" => $id]);
+		if($num){
+			$error = array("status"=>-3,"msg"=>"请先删除此分类下新闻");exit;
+		}
+		$delete_id = $database->delete("{$prefix}news_class",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_news":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$delete_id = $database->delete("{$prefix}news",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_product_class":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$num = $database->select("{prefix}product_class",["pid" => $id]);
+		$list = $database->select("{prefix}product",["cat_id" => $id]);
+		if($num){
+			$error = array("status"=>-3,"msg"=>"请先删除子分类");exit;
+		}
+		if($list){
+			$error = array("status"=>-3,"msg"=>"请先删除此分类下产品");exit;
+		}
+		$delete_id = $database->delete("{$prefix}product_class",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
+		}
+	}
+	break;
+case "delete_product":
+	if($_GET['id']){
+		$id = $intval($_GET['id']);
+		$list = $database->select("{prefix}product",["id" => $id]);
+		$delete_id = $database->delete("{$prefix}product",["s_belong" => $belong,"id" => $id]);
+		if($delete_id){
+			unset($list['pic']);
+			$datas = array("status"=>"1","msg"=>"删除成功");
+		}else{
+			$datas = array("status"=>"0","msg"=>"删除失败");
 		}
 	}
 	break;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2015 年 05 月 07 日 18:01
+-- 生成日期: 2015 年 05 月 08 日 16:17
 -- 服务器版本: 5.5.40
 -- PHP 版本: 5.4.33
 
@@ -67,20 +67,6 @@ CREATE TABLE IF NOT EXISTS `bs_basic` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='网站基本设置表' AUTO_INCREMENT=2 ;
 
-
-create table `bs_user`(
-	id int(10) unsigned not null auto_increment primary key,
-	user_name varchar(20) not null,
-	password char(32) not null,
-	email varchar(50) not null,
-	sex enum('0','1') not null default '0',
-	last_id varchar(20)
-)ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
-
-
-
-
-
 --
 -- 转存表中的数据 `bs_basic`
 --
@@ -126,6 +112,21 @@ CREATE TABLE IF NOT EXISTS `bs_log` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `bs_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `bs_menu` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `is_display` enum('0','1') DEFAULT '1',
+  `mod_id` int(10) NOT NULL,
+  `s_belong` int(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='子菜单表' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `bs_message`
 --
 
@@ -150,22 +151,12 @@ CREATE TABLE IF NOT EXISTS `bs_message` (
 CREATE TABLE IF NOT EXISTS `bs_modular` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
-  `is_display` enum('0','1') default '1';
+  `is_display` enum('0','1') DEFAULT '1',
   `s_belong` int(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='模块表' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-create table `menu`(
-	id int(10) unsigned not null auto_increment primary key,
-	name varchar(20) not null,
-	is_display enum('0','1') default '1',
-	mod_id int(10) not null,
-	s_belong int(4) not null default '1'
-)ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='子菜单表' AUTO_INCREMENT=1 ;
-
-
-
 
 --
 -- 表的结构 `bs_news`
@@ -180,8 +171,8 @@ CREATE TABLE IF NOT EXISTS `bs_news` (
   `new_save_time` int(11) NOT NULL DEFAULT '0',
   `new_people` varchar(30) NOT NULL DEFAULT 'admin',
   `is_display` enum('0','1') NOT NULL DEFAULT '1',
+  `cat_id` int(11) NOT NULL,
   `new_sort` int(5) DEFAULT NULL,
-  `cat_id` int(11) not null,
   `news_last_release` int(13) NOT NULL,
   `belong` int(4) NOT NULL,
   PRIMARY KEY (`id`)
@@ -216,6 +207,7 @@ CREATE TABLE IF NOT EXISTS `bs_product` (
   `model` varchar(50) DEFAULT NULL,
   `pic` varchar(200) NOT NULL,
   `is_display` enum('0','1') NOT NULL DEFAULT '1',
+  `cat_id` int(11) NOT NULL,
   `Recommend` enum('0','1') NOT NULL DEFAULT '0',
   `pro_sort` int(5) DEFAULT NULL,
   `pro_add_time` int(11) NOT NULL,
@@ -252,6 +244,22 @@ CREATE TABLE IF NOT EXISTS `bs_site` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='站点表' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `bs_user`
+--
+
+CREATE TABLE IF NOT EXISTS `bs_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(20) NOT NULL,
+  `password` char(32) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `sex` enum('0','1') NOT NULL DEFAULT '0',
+  `last_id` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
