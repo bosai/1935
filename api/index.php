@@ -8,35 +8,36 @@ error_reporting(E_ALL & ~E_NOTICE);
 $safe=new safe;
 #$safe->ip();
 $safe->token();
+global $belong;
 
 switch ($_GET['act'])
 {
 case "list_about":
-	$datas = $database->select("{$prefix}about", "*");
+	$datas = $database->select("{$prefix}about", "*",["belong" => $belong]);
 	break;
 case "list_basic":
-	$datas = $database->select("{$prefix}basic", "*");
+	$datas = $database->select("{$prefix}basic", "*",["belong" => $belong]);
 	break;
 case "list_contact":
-	$datas = $database->select("{$prefix}contact", "*");
+	$datas = $database->select("{$prefix}contact", "*",["belong" => $belong]);
 	break;
 case "list_log":
-	$datas = $database->select("{$prefix}log", "*");
+	$datas = $database->select("{$prefix}log", "*",["belong" => $belong]);
 	break;
 case "list_message":
-	$datas = $database->select("{$prefix}message", "*");
+	$datas = $database->select("{$prefix}message", "*",["belong" => $belong]);
 	break;
 case "list_news":
-	$datas = $database->select("{$prefix}news", "*");
+	$datas = $database->select("{$prefix}news", "*",["belong" => $belong]);
 	break;
 case "list_news_class":
-	$datas = $database->select("{$prefix}news_class", "*");
+	$datas = $database->select("{$prefix}news_class", "*",["belong" => $belong]);
 	break;
 case "list_product":
-	$datas = $database->select("{$prefix}product_class", "*");
+	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
 	break;
 case "list_product_class":
-	$datas = $database->select("{$prefix}product_class", "*");
+	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong]);
 	break;
 case "create_news":
 	$new_title = trim($_POST['newtitle']);
@@ -219,6 +220,17 @@ case "create_modular":
 	}else{
 		$error = array("status"=>-3,"msg"=>"您填写的信息有误。");exit;
 	}
+case "update_basic":
+	$id = $_GET['id'];
+	
+	$arr = $_POST;
+	$update_id = $database->update("{$prefix}basic",$arr);
+	if($update_id){
+		$datas = array("status"=>"1","msg"=>"修改成功");
+	}else{
+		$datas = array("status"=>"0","msg"=>"修改失败");
+	}
+	break;
 default:
 	$datas=array("status"=>0,"msg"=>"No Action");
 }
