@@ -9,6 +9,10 @@ $safe=new safe;
 #$safe->ip();
 $safe->token();
 global $belong;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 switch ($_GET['act'])
 {
 case "list_about":
@@ -55,12 +59,21 @@ case "create_news":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}news",$arr);
 		if($create_id!=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "update_news":
@@ -76,12 +89,21 @@ case "create_news_class":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}news_class",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_message":
@@ -94,12 +116,21 @@ case "create_message":
 		$arr['belong'] = $belong;
 		$create_id = database->insert("{$prefix}message",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_basic":
@@ -107,9 +138,15 @@ case "create_basic":
 	$arr['belong'] = $belong;
 	$create_id = $database->insert("{$prefix}basic",$arr);
 	if($create_id != 0){
+<<<<<<< HEAD
 		$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 	}else{
 		$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
+=======
+		$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+	}else{
+		$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+>>>>>>> origin/master
 	}
 	break;
 case "create_about":
@@ -122,12 +159,21 @@ case "create_about":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}about",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_contact":
@@ -142,12 +188,21 @@ case "create_contact":
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}contact",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_product":
@@ -165,24 +220,42 @@ case "create_product":
 		$arr['pro_last_release'] = time();
 		$create_id = $database->insert("{$prefix}product",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	if($act_content && $act_content && $act_map_coordinate && $act_map_content && $act_map_title){
 		$arr['art_last_release'] = time();
 		$arr['belong'] = $belong;
 		$create_id = $database->insert("{$prefix}contact",$arr);
 		if($create_id !=0){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_product_class":
@@ -197,6 +270,7 @@ case "create_product_class":
 		$path = $info.'-'.$create_id;
 		$upd=$database->update("{$prefix}product_class",["path"=>$path]);
 		if($create_id && $upd){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$database->delete("{$prefix}product_class","id = ".$create_id);
@@ -204,6 +278,15 @@ case "create_product_class":
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$database->delete("{$prefix}product_class","id = ".$create_id);
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 	break;
 case "create_modular":
@@ -212,12 +295,21 @@ case "create_modular":
 		$arr['s_belong'] = $belong;
 		$create_id = $database->insert("{$prefix}modular",$arr);
 		if($create_id){
+<<<<<<< HEAD
 			$datas = array("status"=>"1","msg"=>"Ìí¼Ó³É¹¦");
 		}else{
 			$datas = array("status"=>"0","msg"=>"Ìí¼ÓÊ§°Ü");
 		}
 	}else{
 		$error = array("status"=>-3,"msg"=>"ÄúÌîÐ´µÄÐÅÏ¢ÓÐÎó¡£");exit;
+=======
+			$datas = array("status"=>"1","msg"=>"æ·»åŠ æˆåŠŸ");
+		}else{
+			$datas = array("status"=>"0","msg"=>"æ·»åŠ å¤±è´¥");
+		}
+	}else{
+		$error = array("status"=>-3,"msg"=>"æ‚¨å¡«å†™çš„ä¿¡æ¯æœ‰è¯¯ã€‚");exit;
+>>>>>>> origin/master
 	}
 case "update_basic":
 	$id = $_GET['id'];
@@ -225,13 +317,27 @@ case "update_basic":
 	$arr = $_POST;
 	$update_id = $database->update("{$prefix}basic",$arr);
 	if($update_id){
+<<<<<<< HEAD
 		$datas = array("status"=>"1","msg"=>"ÐÞ¸Ä³É¹¦");
 	}else{
 		$datas = array("status"=>"0","msg"=>"ÐÞ¸ÄÊ§°Ü");
+=======
+		$datas = array("status"=>"1","msg"=>"ä¿®æ”¹æˆåŠŸ");
+	}else{
+		$datas = array("status"=>"0","msg"=>"ä¿®æ”¹å¤±è´¥");
+>>>>>>> origin/master
 	}
 	break;
 default:
 	$datas=array("status"=>0,"msg"=>"No Action");
 }
 include 'common/check_empty.php';
+<<<<<<< HEAD
 ?>
+=======
+?>
+
+
+
+
+>>>>>>> origin/master
