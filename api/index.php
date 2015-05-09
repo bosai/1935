@@ -110,7 +110,7 @@ case "create_message":
 	$mes_content = trim($arr['mes_content']);
 	if($mes_name && $mes_phone && $mes_email && $mes_content){
 		$arr['belong'] = $belong;
-		$create_id = database->insert("{$prefix}message",$arr);
+		$create_id = $database->insert("{$prefix}message",$arr);
 		if($create_id !=0){
 			$datas = array("status"=>"1","msg"=>"添加成功");
 		}else{
@@ -176,7 +176,7 @@ case "create_product":
 	$model = trim($arr['model']);
 	$recommend = trim($arr['recommend']);
 	$pic = trim($arr['pic']);
-	if($name && $introduct && $advantage && $model &&  && $recommend && $pic){
+	if($name && $introduct && $advantage && $model  && $recommend && $pic){
 		$arr['pro_add_time'] = time();
 		$arr['belong'] = $belong;
 		$arr['pro_last_release'] = time();
