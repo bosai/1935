@@ -132,9 +132,10 @@ case "create_basic":
 	break;
 case "create_about":
 	$arr = $_POST;
+	$about_id = intval($_POST['about_id']);
 	$out_content = trim($arr['out_content']);
 	$out_people = trim($arr['out_people']);
-	if($out_content && $out_people){
+	if($out_content && $out_people && $about_id){
 		$arr['out_add_time'] = time();
 		$arr['out_last_release'] = time();
 		$arr['belong'] = $belong;
@@ -227,7 +228,7 @@ case "create_modular":
 	break;
 case "create_menu":
 	$arr = $_POST;
-	if($arr['name'] && $arr['mod_id']){
+	if($arr['name'] && $arr['mod_id'] && $arr['id_display']){
 		$arr['s_belong'] = $belong;
 		$create_id = $database->insert("{$prefix}menu",$arr);
 		if($create_id){
