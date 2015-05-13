@@ -5,27 +5,23 @@
       <table class="table table-bordered">
             <tbody>
             <tr>
-              <th width="100">幻灯片名称</th>
+              <th width="100">所属分类</th>
               <td>
-              	<input type="text" style="width:400px;" name="slide_name" id="title" value="" class="input input_hd J_title_color" placeholder="请输入幻灯片名称" onkeyup="strlen_verify(this, 'title_len', 160)">
+              	<input type="text" style="width:400px;" name="cla_name" id="title" value="" class="input input_hd J_title_color" placeholder="请输入幻灯片名称" onkeyup="strlen_verify(this, 'title_len', 160)">
               	<span class="must_red">*</span>
               </td>
             </tr>
              <tr>
               <th width="100">链接地址：</th>
               <td>
-              <input type="text" name="slide_url" value="" style="width:400px" class="input  input_hd J_title_color">
+              <input type="text" name="path" value="" style="width:400px" class="input  input_hd J_title_color">
               </td>
-            </tr>
-            <tr>
-              <th width="100">描述</th>
-              <td><input type="text" name="slide_des" value="" style="width:400px" class="input  input_hd J_title_color"></td>
             </tr>
              <tr>
               <th width="100">幻灯片内容</th>
               <td>
               	
-              	<textarea name="slide_content" id="description" style="width:98%;height:200px;"></textarea>
+              	<textarea name="font" id="description" style="width:40%;height:200px;"></textarea>
               </td>
             </tr>
             <tr>

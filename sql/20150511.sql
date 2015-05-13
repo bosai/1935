@@ -177,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `bs_news` (
   `new_people` varchar(30) NOT NULL DEFAULT 'admin',
   `is_display` enum('0','1') NOT NULL DEFAULT '1',
   `cat_id` int(11) NOT NULL,
+  `Recommend` enum('0','1') NOT NULL DEFAULT '0',
   `new_sort` int(5) DEFAULT NULL,
   `news_last_release` int(13) NOT NULL,
   `belong` int(4) NOT NULL,
@@ -265,6 +266,19 @@ CREATE TABLE IF NOT EXISTS `bs_user` (
   `last_id` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `bs_banner` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT primary key,
+  `pic` varchar(100) NOT NULL,
+  `font` char(200) NOT NULL,
+  `cla_name` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='banner表' AUTO_INCREMENT=1 ;
+
+
+
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -41,7 +41,7 @@
             </tr>
 			<tr>
               <th width="100">是否推荐到首页</th>
-              <td>是：<input type="radio" name="recommend" checked value="1">否：<input type="radio" name="recommend" value="0"></td>
+              <td>是：<input type="radio" name="recommend"  value="1">否：<input type="radio" name="recommend" checked value="0"></td>
             </tr>
 			<tr>
               <th width="100">排序</th>
