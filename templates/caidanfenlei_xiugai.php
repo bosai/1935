@@ -1,12 +1,17 @@
 <div class="wrap jj">
-		<ul class="nav nav-tabs">
-		
-			<li><a id="caidanfenlei_tianjiafenlei">添加分类</a></li>
-		</ul>
+
 		<div class="common-form">
 			<form method="post" class="form-horizontal J_ajaxForm" action="/ThinkCMFX/index.php?g=Admin&amp;m=navcat&amp;a=edit_post">
             <div class="table-actions"><p>&nbsp;</p><p>&nbsp;</p></div>
 				<fieldset>
+				<div>
+				 <label class="control-label">所属分类:</label>
+				  <div>
+					<select name="cat_id" id="navcid_select" class="normal_select">
+						<option value="1">公司新闻</option>
+					</select>
+				  </div>
+				</div>
 					<div class="control-group">
 						<label class="control-label">分类名称:</label>
 						<div class="controls">
