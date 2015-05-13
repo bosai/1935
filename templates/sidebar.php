@@ -264,15 +264,7 @@
 							</a>
 
 							<ul class="submenu">
-								<li>
-									<a  class="dropdown-toggle">
-										<i class="icon-double-angle-right"></i>
-
-										1935-子菜单列表
-										<b class="arrow icon-angle-down"></b>
-									</a>
-
-									<ul class="submenu">
+	
 										<li id="gongsijianjie">
 											<a >
 												<i class="icon-leaf"></i>
@@ -291,22 +283,9 @@
 												发展前景
 											</a>
 										</li>                                       
-									</ul>
+
                                     
 								</li>
-                                <li id="tianjia1935zicaidan">
-									<a  class="dropdown-toggle">
-										<i class="icon-double-angle-right"></i>
-
-										添加1935子菜单
-										
-									</a>
-
-									
-                                    
-								</li>
-                                 
-
 							</ul>
                         </li>
                         <li>

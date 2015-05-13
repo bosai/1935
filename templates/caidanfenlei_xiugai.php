@@ -15,9 +15,7 @@
 					<div class="control-group">
 						<label class="control-label">分类名称:</label>
 						<div class="controls">
-							<input name="navcid" value="1" type="hidden">
-							<input class="input" name="name" value="主导航" type="text">
-							<span class="must_red">*</span>
+							<input class="input" name="name"  type="text">
 						</div>
 					</div>
 					<div class="control-group">

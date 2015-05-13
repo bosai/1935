@@ -2,21 +2,6 @@
 <div class="table-actions"><p>&nbsp;</p><p>&nbsp;</p></div>
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label">菜单分类:</label>
-						<div class="controls">
-							<select name="cid" id="navcid_select" class="normal_select">
-															<option value="1">主导航</option>							</select>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">上级:</label>
-						<div class="controls">
-							<select name="parentid" class="normal_select">
-								<option value="0">/</option>
-								<option value="1" selected="">首页</option><option value="2">列表演示</option><option value="3">瀑布流</option><option value="4">关于我们</option>							</select>
-						</div>
-					</div>
-					<div class="control-group">
 						<label class="control-label">标签:</label>
 						<div class="controls">
 							<input class="input" name="label" value="" type="text"><span class="must_red">*</span>

@@ -7,14 +7,24 @@
 		          <div class="tab-pane active" id="A">
 		          	<table >
 							<tbody>
-								
 								<tr>
-									<td>中文分类名称：</td>
-									<td><input class="input" name="name" value="阿百川" type="text"><span class="must_red">*</span></td>
+									<td>ID:</td>
+									<td><input class="input" name="id" value="0" type="text"></td>
 								</tr>
 								<tr>
-									<td>英文分类名称：</td>
-									<td><input class="input" name="name" value="阿百川" type="text"></td>
+									<td>所属分类:</td>
+									<td><select name="pic" class="normal_select">
+											<option value="0">请添加分类</option>
+										</select></td>
+										<input type="hidden" name="path" value="0">
+								</tr>
+								<tr>
+									<td>分类名称：</td>
+									<td><input class="input" name="name" value="" type="text"></td>
+								</tr>
+								<tr>
+									<td>排序：</td>
+									<td><input class="input" name="pro_class_sort" type="text"></td>
 								</tr>
 								
 							</tbody>

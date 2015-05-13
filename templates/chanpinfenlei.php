@@ -7,34 +7,20 @@
 					
 						<th width="50">ID</th>
 						<th>分类名称</th>
-						<th>分类类型</th>
-						<th align="center">访问</th>
+						<th>所属分类</th>
+						<th>以下产品数</th>
 						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-					<td><input name="listorders[1]" size="3" value="0" class="input input-order" type="text"></td>
+					<td><input name="pro_class_sort" size="3" value="0" class="input input-order" type="text"></td>
 				
-					<td> <a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=1" target="_blank">列表演示</a></td>
-	    			<td>文章</td>
-					<td align="center"><a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=1" target="_blank">访问</a></td>
-					<td ><span class="tianjiazilei">添加子类</span>  <span class="xiugai">修改</span> | <span >删除</span> </td>
-				</tr><tr>
-					<td><input name="listorders[2]" size="3" value="0" class="input input-order" type="text"></td>
-					
-					<td> <a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=2" target="_blank">瀑布流</a></td>
-	    			<td>文章</td>
-					<td align="center"><a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=2" target="_blank">访问</a></td>
-					<td><a href="/thinkcmfx/index.php?g=&amp;m=AdminTerm&amp;a=add&amp;parent=2">添加子类</a> | <a href="/thinkcmfx/index.php?g=&amp;m=AdminTerm&amp;a=edit&amp;id=2">修改</a> | <a class="J_ajax_del" href="/thinkcmfx/index.php?g=&amp;m=AdminTerm&amp;a=delete&amp;id=2">删除</a> </td>
-				</tr><tr>
-					<td><input name="listorders[3]" size="3" value="0" class="input input-order" type="text"></td>
-					
-					<td> <a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=3" target="_blank">阿百川</a></td>
-	    			<td>文章</td>
-					<td align="center"><a href="/thinkcmfx/index.php?g=portal&amp;m=list&amp;a=index&amp;id=3" target="_blank">访问</a></td>
-					<td><a href="/thinkcmfx/index.php?g=&amp;m=AdminTerm&amp;a=add&amp;parent=3">添加子类</a> | <a href="">修改</a> | <a class="J_ajax_del" href="/thinkcmfx/index.php?g=&amp;m=AdminTerm&amp;a=delete&amp;id=3">删除</a> </td>
-				</tr>				</tbody>
+					<td>上衣</td>
+	    			<td>服装</td>
+	    			<td>10</td>
+					<td ><span class="tianjiazilei">添加子分类</span> | <span class="xiugai">修改</span> | <span >删除</span> </td>
+				</tr></tbody>
 				
 			</table>
 		</form>

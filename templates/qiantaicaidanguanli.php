@@ -12,7 +12,7 @@
 					<tr>
 						<th width="50">排序</th>
 						<th width="50">ID</th>
-						<th>分类名称</th>
+						<th>菜单名称</th>
 						<th>链接</th>
 						<th width="100">状态</th>
 						<th width="150">管理操作</th>
