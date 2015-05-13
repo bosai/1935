@@ -60,6 +60,12 @@ case "list_product":
 case "list_product_class":
 	$datas = $database->select("{$prefix}product_class", "*",["belong" => $belong,"order" => "pro_class_sort DESC"]);
 	break;
+case "list_modular":
+	$datas = $database->select("{$prefix}modular","*",['s_belong' => $belong],"order" => "mod_sort DESC");
+	break;
+case "list_menu":
+	$datas = $database->select("{$prefix}menu","*",['s_belong' => $belong],"order" => "menu_sort DESC");
+	break;
 case "create_news":
 	$new_title = trim($_POST['newtitle']);
 	$new_pic = trim($_POST['pic']);
@@ -110,7 +116,7 @@ case "create_message":
 	$mes_content = trim($arr['mes_content']);
 	if($mes_name && $mes_phone && $mes_email && $mes_content){
 		$arr['belong'] = $belong;
-		$create_id = $database->insert("{$prefix}message",$arr);
+		$create_id = database->insert("{$prefix}message",$arr);
 		if($create_id !=0){
 			$datas = array("status"=>"1","msg"=>"添加成功");
 		}else{
@@ -177,7 +183,7 @@ case "create_product":
 	$model = trim($arr['model']);
 	$recommend = trim($arr['recommend']);
 	$pic = trim($arr['pic']);
-	if($name && $introduct && $advantage && $model  && $recommend && $pic){
+	if($name && $introduct && $advantage && $model &&  && $recommend && $pic){
 		$arr['pro_add_time'] = time();
 		$arr['belong'] = $belong;
 		$arr['pro_last_release'] = time();
@@ -193,7 +199,7 @@ case "create_product":
 	break;
 case "create_product_class":
 	$arr = $_POST;
-	$pic = $arr['pic'];
+	$pic = intval($arr['pic']);
 	$name = $arr['name'];
 	if($pic && $name){
 		$arr['last_release'] = time();
@@ -214,7 +220,7 @@ case "create_product_class":
 	break;
 case "create_modular":
 	$arr = $_POST;
-	if($arr['name']){
+	if($arr['name'] && $arr['path']){
 		$arr['s_belong'] = $belong;
 		$create_id = $database->insert("{$prefix}modular",$arr);
 		if($create_id){
@@ -228,7 +234,11 @@ case "create_modular":
 	break;
 case "create_menu":
 	$arr = $_POST;
-	if($arr['name'] && $arr['mod_id'] && $arr['id_display']){
+	$name = trim($arr['name']);
+	$is_display = intval($arr['id_display']);
+	$sort = intval($arr['menu_sort']);
+	$path = trim($arr['path']);
+	if($name && $is_display && $path && $sort){
 		$arr['s_belong'] = $belong;
 		$create_id = $database->insert("{$prefix}menu",$arr);
 		if($create_id){

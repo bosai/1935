@@ -1,0 +1,62 @@
+
+.form-control {
+    display: block;
+    width: 206px;
+    height: 34px;
+}
+input, textarea, .uneditable-input {
+    width: 206px;
+}
+.form-horizontal .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+label, input, button, select, textarea {
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 20px;
+}
+.form-horizontal .controls {
+    margin-left: 180px;
+}
+.form-horizontal .control-group {
+    margin-bottom: 20px;
+}
+.form-horizontal .form-actions {
+    padding-left: 180px;
+}
+/**/
+.rowform {
+    padding-left: 5px;
+    vertical-align: middle;
+}
+ td, tb-type2 th.td {
+    padding: 5px 5px 3px 0px;
+    border-top: 1px dotted #CBE9F3;
+}
+input.type-file-button:focus {
+    background: url("../images/sky/bg_position.gif") no-repeat scroll -50px -450px transparent;
+    display: inline;
+    width: 57px;
+    height: 25px;
+    float: left;
+    border: 0px none;
+}
+input[type="radio"], input[type="checkbox"] {
+    width: 2px;
+}
+J_ajaxForm{width:100%}
+.ace-settings-container{display:none}
+.edui-default{ width:1000px; height:400px; }
+#edui1_bottombar{ display:none}
+.nav li{cursor:pointer}
+.tianjiazilei{cursor:pointer}
+
+#uploader{width:400px; }
+.error_return{ margin-left:100px}
